@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# Real facility imports and learned geocodes. Example files are committed.
+backend/data/*
+!backend/data/*.example.json
+
+# Local Chrome profile and screenshots from manual runs
+.tmp/
+chrome-profile/

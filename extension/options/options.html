@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nearby relocation options</title>
+    <link rel="stylesheet" href="../ui.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Nearby relocation</p>
+      <h1>Options</h1>
+      <p class="lead">
+        The extension keeps the backend URL here. It does not store API keys.
+        Beetexting's message markup has not been verified while logged in, so the selectors below are a starting point and the panel always has a manual address box.
+      </p>
+      <form id="options-form">
+        <label>
+          Backend URL
+          <input id="backendUrl" name="backendUrl" type="url" required />
+        </label>
+        <label>
+          Results to show
+          <input id="limit" name="limit" type="number" min="1" max="20" required />
+        </label>
+        <label class="check">
+          <input id="debug" name="debug" type="checkbox" />
+          Log detection details in the page console
+        </label>
+        <fieldset>
+          <legend>Conversation selectors</legend>
+          <p>Comma-separated. An invalid selector is skipped. If nothing matches, the extension scans visible booking-like text outside the nav.</p>
+          <label>
+            Conversation root
+            <input id="selectorConversationRoot" name="selectorConversationRoot" type="text" />
+          </label>
+          <label>
+            Message text
+            <input id="selectorMessageText" name="selectorMessageText" type="text" />
+          </label>
+          <label>
+            Thread title
+            <input id="selectorThreadTitle" name="selectorThreadTitle" type="text" />
+          </label>
+          <label>
+            Active conversation
+            <input id="selectorActiveConversation" name="selectorActiveConversation" type="text" />
+          </label>
+        </fieldset>
+        <div class="actions">
+          <button class="primary" type="submit">Save</button>
+          <button id="reset" type="button">Reset defaults</button>
+          <button id="test" type="button">Test connection</button>
+        </div>
+        <p id="status" role="status"></p>
+      </form>
+    </main>
+    <script src="../lib/defaults.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "source": "example",
+  "disclaimer": "Approximate coordinates for the fictional sample conversations only. Not a customer database.",
+  "entries": {
+    "406 beacon st": {
+      "lat": 42.35548,
+      "lng": -71.07285,
+      "label": "406 Beacon St, Boston, MA 02115"
+    },
+    "75 state st": {
+      "lat": 42.3589,
+      "lng": -71.0555,
+      "label": "75 State St, Boston, MA 02109"
+    }
+  }
+}
