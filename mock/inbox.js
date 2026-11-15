@@ -2,28 +2,39 @@
   "use strict";
 
   var threads = {
-    jordan: { title: "Jordan Lee · +1 (617) 555-0148", template: "tpl-jordan" },
-    sam: { title: "Sam Patel · +1 (617) 555-0194", template: "tpl-sam" }
+    jordan: {
+      name: "Jordan Lee",
+      phone: "+1 (617) 555-0148",
+      tel: "tel:+16175550148",
+      template: "tpl-jordan"
+    },
+    sam: {
+      name: "Sam Patel",
+      phone: "+1 (617) 555-0194",
+      tel: "tel:+16175550194",
+      template: "tpl-sam"
+    }
   };
 
   function show(id) {
     var thread = threads[id];
     if (!thread) return;
-    document.querySelectorAll("[data-ysr-thread]").forEach(function (button) {
-      var on = button.getAttribute("data-thread-id") === id;
-      button.classList.toggle("active", on);
-      if (on) button.setAttribute("aria-current", "true");
-      else button.removeAttribute("aria-current");
+    document.querySelectorAll(".conversation-card").forEach(function (card) {
+      card.classList.toggle("active", card.getAttribute("data-thread-id") === id);
     });
-    document.querySelector("[data-ysr-thread-title]").textContent = thread.title;
-    var body = document.querySelector("[data-ysr-messages]");
-    body.replaceChildren();
-    body.appendChild(document.getElementById(thread.template).content.cloneNode(true));
+    document.getElementById("contact-title-name").textContent = thread.name;
+    document.getElementById("contact-phone-number").textContent = thread.phone;
+    var link = document.getElementById("contact-phone-link");
+    link.setAttribute("href", thread.tel);
+    link.textContent = thread.phone;
+    var messages = document.querySelector("app-texting-scroller .messages-wrapper");
+    messages.replaceChildren();
+    messages.appendChild(document.getElementById(thread.template).content.cloneNode(true));
   }
 
-  document.querySelectorAll("[data-ysr-thread]").forEach(function (button) {
-    button.addEventListener("click", function () {
-      show(button.getAttribute("data-thread-id"));
+  document.querySelectorAll(".conversation-card").forEach(function (card) {
+    card.addEventListener("click", function () {
+      show(card.getAttribute("data-thread-id"));
     });
   });
 })();

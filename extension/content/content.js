@@ -110,13 +110,39 @@
   }
 
   function threadKey(doc) {
-    var active = queryFirst(doc, settings.selectorActiveConversation);
+    // Every conversation stays on /messages, so the URL is not an identity.
+    var phone = queryFirst(doc, settings.selectorContactPhone);
+    var link = queryFirst(doc, settings.selectorPhoneLink);
     var title = queryFirst(doc, settings.selectorThreadTitle);
+    var active = queryFirst(doc, settings.selectorActiveConversation);
     return [
-      location.pathname + location.search + location.hash,
-      active ? active.getAttribute("data-thread-id") || sliceText(active, 80) : "",
-      title ? sliceText(title, 80) : ""
+      phone ? sliceText(phone, 40) : "",
+      link ? link.getAttribute("href") || "" : "",
+      title ? sliceText(title, 80) : "",
+      active ? sliceText(active, 120) : ""
     ].join("|");
+  }
+
+  function alignPanel() {
+    var frame = document.getElementById("ysr-relocation-frame");
+    if (!rootEl || !frame || !tabEl) return;
+    var column = queryFirst(document, settings.selectorContactColumn);
+    var width = 340;
+    var top = 0;
+    var height = window.innerHeight;
+    if (column) {
+      var rect = column.getBoundingClientRect();
+      if (rect.width >= 240 && rect.width <= 520) width = Math.max(340, Math.round(rect.width));
+      if (rect.height > 200) {
+        top = Math.max(0, Math.round(rect.top));
+        height = Math.max(200, Math.min(window.innerHeight - top, Math.round(rect.height)));
+      }
+    }
+    rootEl.style.top = top + "px";
+    rootEl.style.height = height + "px";
+    frame.style.width = width + "px";
+    frame.style.height = height + "px";
+    tabEl.style.height = height + "px";
   }
 
   function deliver() {
@@ -162,7 +188,8 @@
 
   function scheduleScan() {
     clearTimeout(scanTimer);
-    scanTimer = setTimeout(scan, 200);
+    // Batch the active-card class change with the message-list swap.
+    scanTimer = setTimeout(scan, 250);
   }
 
   function setCollapsed(collapsed) {
@@ -197,6 +224,7 @@
       deliver();
     });
     frame.src = chrome.runtime.getURL("panel/panel.html");
+    alignPanel();
   }
 
   function onPanelMessage(event) {
@@ -239,10 +267,28 @@
   });
   YSR.loadSettings().then(function (next) {
     settings = next;
+    alignPanel();
     scan();
-    var observer = new MutationObserver(scheduleScan);
-    observer.observe(document.documentElement, { subtree: true, childList: true, characterData: true });
+    // Class moves .active between .conversation-card rows. Text changes update
+    // #contact-phone-number and the message bubbles. Neither shows up in the URL.
+    var observer = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i += 1) {
+        var node = mutations[i].target;
+        if (node && node.nodeType === 3) node = node.parentElement;
+        if (node && node.closest && node.closest("#ysr-relocation-root")) continue;
+        scheduleScan();
+        return;
+      }
+    });
+    observer.observe(document.documentElement, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["class"]
+    });
   });
+  window.addEventListener("resize", alignPanel);
   chrome.storage.onChanged.addListener(function () {
     YSR.loadSettings().then(function (next) {
       settings = next;

@@ -8,30 +8,42 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  // Selectors are a starting point only. Beetexting's DOM was not inspected
-  // while logged in. The mock page uses the data-ysr-* hooks. On the live
-  // inbox, leave these in place and rely on text heuristics until someone
-  // confirms real selectors on the options page.
+  // Logged-in inbox at https://app.beetexting.com/messages (Angular, top-level
+  // DOM, no shadow root, no inbox iframe). The URL does not change per
+  // conversation. Avoid _ngcontent-* and ng-star-inserted; those are unstable.
   var DEFAULT_SETTINGS = {
     backendUrl: "http://127.0.0.1:8787",
     limit: 5,
     debug: false,
-    selectorConversationRoot: "[data-ysr-conversation]",
-    selectorMessageText: "[data-ysr-message]",
-    selectorThreadTitle: "[data-ysr-thread-title]",
-    selectorActiveConversation: "[data-ysr-thread][aria-current='true']"
+    selectorConversationRoot: "app-texting-scroller .messages-wrapper",
+    selectorMessageText: ".message-block[data-id] > .message.incoming .message-text, .message-block[data-id] > .message.outgoing .message-text",
+    selectorThreadTitle: "#contact-title-name",
+    selectorActiveConversation: ".conversation-card.active",
+    selectorContactPhone: "#contact-phone-number",
+    selectorPhoneLink: "a#contact-phone-link[href^=\"tel:\"]",
+    selectorContactColumn: ".column-block.contact-block"
   };
 
+  var SELECTOR_KEYS = [
+    "selectorConversationRoot",
+    "selectorMessageText",
+    "selectorThreadTitle",
+    "selectorActiveConversation",
+    "selectorContactPhone",
+    "selectorPhoneLink",
+    "selectorContactColumn"
+  ];
+
   function copySettings(settings) {
-    return {
+    var copy = {
       backendUrl: settings.backendUrl,
       limit: settings.limit,
-      debug: settings.debug,
-      selectorConversationRoot: settings.selectorConversationRoot,
-      selectorMessageText: settings.selectorMessageText,
-      selectorThreadTitle: settings.selectorThreadTitle,
-      selectorActiveConversation: settings.selectorActiveConversation
+      debug: settings.debug
     };
+    for (var i = 0; i < SELECTOR_KEYS.length; i += 1) {
+      copy[SELECTOR_KEYS[i]] = settings[SELECTOR_KEYS[i]];
+    }
+    return copy;
   }
 
   function normalizeSettings(stored) {
@@ -41,9 +53,8 @@
     merged.limit = Math.max(1, Math.min(20, Math.floor(limit)));
     merged.backendUrl = String(merged.backendUrl || DEFAULT_SETTINGS.backendUrl).trim().replace(/\/+$/, "");
     merged.debug = merged.debug === true || merged.debug === "true";
-    var keys = ["selectorConversationRoot", "selectorMessageText", "selectorThreadTitle", "selectorActiveConversation"];
-    for (var i = 0; i < keys.length; i += 1) {
-      var key = keys[i];
+    for (var i = 0; i < SELECTOR_KEYS.length; i += 1) {
+      var key = SELECTOR_KEYS[i];
       var value = String(merged[key] == null ? "" : merged[key]).trim();
       merged[key] = value || DEFAULT_SETTINGS[key];
     }

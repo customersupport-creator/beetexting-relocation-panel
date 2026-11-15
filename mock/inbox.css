@@ -15,13 +15,12 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--canvas);
-  padding-right: 450px;
 }
 
 .app {
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
-  grid-template-columns: 72px 300px minmax(0, 1fr);
+  grid-template-columns: 64px 280px minmax(0, 1fr) 312px;
 }
 
 .rail {
@@ -52,17 +51,29 @@ body {
 }
 
 .list,
-.thread {
+.thread,
+.contact-block {
   background: white;
-  min-height: 100vh;
+  min-height: 0;
+  min-width: 0;
 }
 
-.list { border-right: 1px solid var(--line); }
+.list { border-right: 1px solid var(--line); overflow: auto; }
+.thread { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+.contact-block { overflow: auto; }
 
 .list header,
-.thread header {
+.thread-head,
+app-contact-panel > header {
   padding: 16px 16px 12px;
   border-bottom: 1px solid var(--line);
+}
+
+.thread-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 .kicker {
@@ -75,6 +86,11 @@ body {
 }
 
 h1, h2 { margin: 2px 0 0; font-size: 18px; }
+h3 { margin: 0 0 4px; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+
+.contact-name { font-size: 18px; font-weight: 750; }
+.contact-phone-number { color: var(--muted); margin-top: 2px; }
+#contact-phone-link { color: var(--accent); font-weight: 700; }
 
 .mock-pill {
   display: inline-block;
@@ -87,37 +103,37 @@ h1, h2 { margin: 2px 0 0; font-size: 18px; }
   font-weight: 700;
 }
 
-.thread-button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  border: 0;
+.conversation-card {
   border-bottom: 1px solid var(--line);
-  background: white;
-  padding: 12px 16px;
   cursor: pointer;
 }
 
-.thread-button.active { background: #eef5fc; box-shadow: inset 3px 0 var(--accent); }
-
+.card-wrapper { padding: 12px 16px; }
+.conversation-card.active { background: #eef5fc; box-shadow: inset 3px 0 var(--accent); }
 .who { display: block; font-weight: 750; }
 .preview, .when { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
 
-.thread header strong { font-size: 16px; }
-.phone { color: var(--muted); font-weight: 500; }
+app-texting-scroller { display: flex; flex: 1; min-height: 0; }
+.roll-container { flex: 1; overflow: auto; }
+.messages-wrapper { display: flex; flex-direction: column; gap: 10px; padding: 18px 18px 48px; }
 
-.messages { padding: 18px 18px 48px; display: flex; flex-direction: column; gap: 10px; }
-
-.bubble {
-  max-width: 460px;
+.message { max-width: 460px; }
+.message.incoming { align-self: flex-start; }
+.message.outgoing { align-self: flex-end; }
+.message-text {
   padding: 10px 12px;
   border-radius: 14px;
   white-space: pre-wrap;
 }
+.message.incoming .message-text { background: #f2f5f8; }
+.message.outgoing .message-text { background: var(--accent); color: white; }
+.message-text p { margin: 0; }
 
-.bubble.in { background: #f2f5f8; align-self: flex-start; }
-.bubble.out { background: var(--accent); color: white; align-self: flex-end; }
-.time { margin: 4px 2px 0; color: var(--muted); font-size: 11px; }
+app-contact-panel section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+app-contact-panel p { margin: 0; }
 
 .notice {
   margin: 16px;

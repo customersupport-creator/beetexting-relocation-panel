@@ -2,7 +2,18 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const { DEFAULT_SETTINGS, normalizeSettings, loadSettings } = require("../extension/lib/defaults.js");
 
-test("settings fall back to the mock-page selectors and clamp the result limit", () => {
+test("defaults match the logged-in Beetexting inbox", () => {
+  assert.equal(DEFAULT_SETTINGS.selectorConversationRoot, "app-texting-scroller .messages-wrapper");
+  assert.match(DEFAULT_SETTINGS.selectorMessageText, /\.message-block\[data-id\]/);
+  assert.match(DEFAULT_SETTINGS.selectorMessageText, /\.message-text/);
+  assert.equal(DEFAULT_SETTINGS.selectorThreadTitle, "#contact-title-name");
+  assert.equal(DEFAULT_SETTINGS.selectorActiveConversation, ".conversation-card.active");
+  assert.equal(DEFAULT_SETTINGS.selectorContactPhone, "#contact-phone-number");
+  assert.match(DEFAULT_SETTINGS.selectorPhoneLink, /#contact-phone-link/);
+  assert.equal(DEFAULT_SETTINGS.selectorContactColumn, ".column-block.contact-block");
+});
+
+test("blank selectors fall back to the inbox defaults and the result limit is clamped", () => {
   const settings = normalizeSettings({
     backendUrl: "http://127.0.0.1:8787/",
     limit: 99,

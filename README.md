@@ -59,7 +59,7 @@ Load the extension:
 
 The panel should open on the right with the Beacon Street booking filled in and a ranked list beneath it. Click **Sam Patel** to switch threads; the panel should pick up 75 State St. Collapse the panel with **Hide** or the vertical tab. The extension icon opens the side panel.
 
-`http://127.0.0.1:4173/heuristic.html` omits the configured selectors on purpose. The open thread is still detected from the visible text, and an address sitting in the aside is ignored.
+`http://127.0.0.1:4173/heuristic.html` omits those selectors on purpose. The open thread is still detected from the visible text, and an address sitting in the aside is ignored.
 
 ## Options
 
@@ -72,7 +72,7 @@ Right-click the extension icon and choose **Options**, or use **Options** in the
 | Conversation selectors | Comma-separated CSS. A bad selector is skipped. |
 | Log detection details | Prints the extracted booking to the page console. Use this while checking a real inbox. |
 
-Default selectors match the mock page (`[data-ysr-conversation]`, `[data-ysr-message]`, and so on). They are **not** verified against a logged-in Beetexting DOM. On the live app the content script falls back to visible text that looks like a booking, outside `nav` and `aside`. Confirm real selectors before relying on that.
+Default selectors match a logged-in inbox at `https://app.beetexting.com/messages`. The app is Angular in the top-level document (no shadow root and no inbox iframe). The path stays `/messages` for every conversation, so a switch is the active row (`.conversation-card.active`), the phone (`#contact-phone-number`), or the message list changing — not the URL. Messages are `.message-block[data-id] .message-text`. The contact column (`.column-block.contact-block`, about 312px) is already in use, so the panel is a fixed overlay on that column with a tab to collapse it. It is not inserted into Angular's view. Selectors avoid `_ngcontent-*` and `ng-star-inserted`. If those nodes are missing, the content script falls back to visible booking-like text outside `nav` and `aside`.
 
 **Test connection** calls `GET /health`.
 
@@ -145,7 +145,7 @@ The Node tests cover haversine distance, relocation ranking (including “do not
 
 ## Next steps
 
-**Selector verification.** Sign in to a Beetexting inbox, turn on **Log detection details**, and open a real thread that contains a facility and a time window. If the manual box is empty or wrong, inspect the message nodes and paste those selectors into Options. Keep the manual box either way.
+**Booking text on a live thread.** The inbox structure above is from a logged-in session. Open a real thread that contains a facility and a time window with **Log detection details** on. If the manual box is empty or wrong, adjust the selectors in Options. Keep the manual box either way.
 
 **SpotHero availability.** Add a provider next to `MockAvailabilityProvider` that maps our facility id to a SpotHero facility and checks the booking window. Leave `AVAILABILITY_PROVIDER=mock` as the default until that client is reviewed. Do not put SpotHero credentials in the extension; they belong in the backend environment.
 

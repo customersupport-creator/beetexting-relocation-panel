@@ -84,8 +84,26 @@ test("returns an empty booking instead of throwing on blank or noisy text", () =
   assert.equal(extractBooking(buried).start, "2026-11-14T17:30");
 });
 
-test("the mock inbox contains the sample booking the panel should detect", () => {
+test("the mock inbox mirrors the logged-in Beetexting DOM and contains the sample booking", () => {
   const html = fs.readFileSync(path.join(__dirname, "../mock/index.html"), "utf8");
+  assert.match(html, /class="conversation-card active"/);
+  assert.match(html, /class="card-wrapper"/);
+  assert.match(html, /<app-texting-scroller>/);
+  assert.match(html, /class="roll-container"/);
+  assert.match(html, /class="messages-wrapper"/);
+  assert.match(html, /class="message-block" data-id=/);
+  assert.match(html, /class="message incoming"/);
+  assert.match(html, /class="message outgoing"/);
+  assert.match(html, /id="contact-title-name" class="contact-name"/);
+  assert.match(html, /id="contact-phone-number" class="contact-phone-number"/);
+  assert.match(html, /id="contact-phone-link" href="tel:/);
+  assert.match(html, /class="column-block contact-block"/);
+  assert.match(html, /<app-contact-panel>/);
+  assert.match(html, /class="consent-section"/);
+  assert.match(html, /class="sequence-tags-section"/);
+  assert.match(html, /class="tags-section"/);
+  assert.match(html, /class="notes-section"/);
+  assert.doesNotMatch(html, /_ngcontent|ng-star-inserted/);
   const slice = html.match(/data-sample="beacon">([\s\S]*?)<\/div>/);
   assert.ok(slice, "mock page is missing the beacon sample message");
   const text = slice[1].replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, " ");

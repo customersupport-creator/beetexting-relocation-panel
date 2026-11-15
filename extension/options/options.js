@@ -10,7 +10,10 @@
     "selectorConversationRoot",
     "selectorMessageText",
     "selectorThreadTitle",
-    "selectorActiveConversation"
+    "selectorActiveConversation",
+    "selectorContactPhone",
+    "selectorPhoneLink",
+    "selectorContactColumn"
   ];
 
   function setStatus(text) {
