@@ -1,0 +1,24 @@
+{
+  "name": "beetexting-relocation-panel",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Proof of concept: nearby parking relocations inside the Beetexting inbox.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "tsx backend/src/main.ts",
+    "demo": "node scripts/demo.js",
+    "mock": "node mock/serve.js",
+    "screenshot": "node scripts/screenshot.mjs",
+    "import:airtable": "tsx backend/src/importAirtable.ts",
+    "test": "node --test test/*.test.js && node --import tsx --test backend/test/*.test.ts",
+    "typecheck": "tsc --noEmit -p backend/tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.1",
+    "puppeteer-core": "^25.17.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

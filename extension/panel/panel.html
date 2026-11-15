@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nearby relocation</title>
+    <link rel="stylesheet" href="../ui.css" />
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <p class="eyebrow">Relocation</p>
+        <h1>Nearby facilities</h1>
+      </div>
+      <button id="collapse" type="button">Hide</button>
+    </header>
+    <p id="banner" class="banner" hidden></p>
+    <form id="search-form">
+      <label>
+        Facility address
+        <input id="address" name="address" type="text" autocomplete="off" placeholder="406 Beacon St" required />
+      </label>
+      <div class="times">
+        <label>
+          Start
+          <input id="start" name="start" type="datetime-local" />
+        </label>
+        <label>
+          End
+          <input id="end" name="end" type="datetime-local" />
+        </label>
+      </div>
+      <div class="form-actions">
+        <button id="search" class="primary" type="submit">Find nearby</button>
+        <button id="use-detected" type="button" hidden>Use detected booking</button>
+      </div>
+      <p id="meta" class="meta"></p>
+    </form>
+    <p id="status" class="status" role="status"></p>
+    <ol id="results"></ol>
+    <footer>
+      <button id="options" type="button">Options</button>
+      <span id="health">Checking backend…</span>
+    </footer>
+    <script src="../lib/defaults.js"></script>
+    <script src="../lib/message.js"></script>
+    <script src="panel.js"></script>
+  </body>
+</html>

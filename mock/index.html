@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mock Beetexting inbox</title>
+    <link rel="stylesheet" href="/inbox.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="rail" aria-label="Mock app navigation">
+        <div class="mark">bt</div>
+        <span>Inbox</span>
+      </aside>
+      <section class="list">
+        <header>
+          <p class="kicker">Local mock</p>
+          <h1>Messages</h1>
+          <span class="mock-pill">Not the live Beetexting app</span>
+        </header>
+        <div class="conversation-card active" data-thread-id="jordan">
+          <div class="card-wrapper">
+            <span class="who">Jordan Lee</span>
+            <span class="preview">Garage entrance is blocked</span>
+            <span class="when">Today · 4:12 PM</span>
+          </div>
+        </div>
+        <div class="conversation-card" data-thread-id="sam">
+          <div class="card-wrapper">
+            <span class="who">Sam Patel</span>
+            <span class="preview">Booked lot is full</span>
+            <span class="when">Yesterday · 6:02 PM</span>
+          </div>
+        </div>
+      </section>
+      <main class="thread">
+        <header class="thread-head">
+          <div>
+            <div id="contact-title-name" class="contact-name">Jordan Lee</div>
+            <div id="contact-phone-number" class="contact-phone-number">+1 (617) 555-0148</div>
+          </div>
+          <a id="contact-phone-link" href="tel:+16175550148">Call</a>
+        </header>
+        <app-texting-scroller>
+          <div class="roll-container">
+            <div class="messages-wrapper">
+              <div class="message-block" data-id="msg-jordan-1">
+                <div class="message incoming">
+                  <div class="message-text"><p>Hi — the garage entrance on Beacon is blocked and I can't get into my spot. Can you move me somewhere nearby?</p></div>
+                </div>
+              </div>
+              <div class="message-block" data-id="msg-jordan-2">
+                <div class="message incoming">
+                  <div class="message-text" data-sample="beacon"><p>SpotHero confirmation<br>Facility: 406 Beacon St. - Parallel Spot #4 Only<br>Rental ID: R-184293<br>Plate: 8ABC12<br>Sat Nov 14, 2026 5:30 PM-9:30 PM</p></div>
+                </div>
+              </div>
+              <div class="message-block" data-id="msg-jordan-3">
+                <div class="message outgoing">
+                  <div class="message-text"><p>I can check nearby facilities we operate. One moment.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-texting-scroller>
+      </main>
+      <aside class="column-block contact-block">
+        <app-contact-panel>
+          <header>
+            <p class="kicker">Contact</p>
+            <h2>Details</h2>
+          </header>
+          <section class="consent-section"><h3>Consent</h3><p>Texting allowed</p></section>
+          <section class="sequence-tags-section"><h3>Sequences</h3><p>None</p></section>
+          <section class="tags-section"><h3>Tags</h3><p>SpotHero</p></section>
+          <section class="notes-section"><h3>Notes</h3><p>Relocation panel covers this column.</p></section>
+        </app-contact-panel>
+      </aside>
+    </div>
+    <template id="tpl-jordan">
+      <div class="message-block" data-id="msg-jordan-1">
+        <div class="message incoming">
+          <div class="message-text"><p>Hi — the garage entrance on Beacon is blocked and I can't get into my spot. Can you move me somewhere nearby?</p></div>
+        </div>
+      </div>
+      <div class="message-block" data-id="msg-jordan-2">
+        <div class="message incoming">
+          <div class="message-text" data-sample="beacon"><p>SpotHero confirmation<br>Facility: 406 Beacon St. - Parallel Spot #4 Only<br>Rental ID: R-184293<br>Plate: 8ABC12<br>Sat Nov 14, 2026 5:30 PM-9:30 PM</p></div>
+        </div>
+      </div>
+      <div class="message-block" data-id="msg-jordan-3">
+        <div class="message outgoing">
+          <div class="message-text"><p>I can check nearby facilities we operate. One moment.</p></div>
+        </div>
+      </div>
+    </template>
+    <template id="tpl-sam">
+      <div class="message-block" data-id="msg-sam-1">
+        <div class="message incoming">
+          <div class="message-text"><p>The lot you sold me is full and I am circling the block.</p></div>
+        </div>
+      </div>
+      <div class="message-block" data-id="msg-sam-2">
+        <div class="message incoming">
+          <div class="message-text" data-sample="state"><p>SpotHero confirmation<br>Facility: 75 State St. - Valet Only<br>Rental ID: R-190044<br>Plate: 4ZK819<br>Fri Nov 13, 2026 8:00 AM-6:00 PM</p></div>
+        </div>
+      </div>
+    </template>
+    <script src="/inbox.js"></script>
+  </body>
+</html>

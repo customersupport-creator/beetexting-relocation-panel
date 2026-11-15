@@ -1,0 +1,52 @@
+#ysr-relocation-root {
+  all: initial;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  pointer-events: none;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+#ysr-relocation-root button,
+#ysr-relocation-root iframe {
+  pointer-events: auto;
+}
+
+#ysr-relocation-tab {
+  width: 36px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid #314038;
+  background: #1e2a24;
+  color: #f6f1e7;
+  cursor: pointer;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font: 650 12px/1 "Segoe UI", system-ui, sans-serif;
+}
+
+#ysr-relocation-tab:focus-visible {
+  outline: 2px solid #e2b15a;
+  outline-offset: -4px;
+}
+
+#ysr-relocation-frame {
+  width: 340px;
+  height: 100%;
+  border: 0;
+  background: #f3efe6;
+  box-shadow: -12px 0 32px rgba(28, 25, 21, 0.18);
+}
+
+#ysr-relocation-root.ysr-collapsed iframe {
+  display: none;
+}

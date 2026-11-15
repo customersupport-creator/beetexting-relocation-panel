@@ -1,0 +1,114 @@
+{
+  "source": "example",
+  "disclaimer": "Fictional sample facilities for a public proof of concept. These are not YourSpotRented locations, not SpotHero inventory, and not customer records. Street coordinates are approximate public-map points so distances look realistic.",
+  "facilities": [
+    {
+      "id": "ex-park-plaza",
+      "name": "EXAMPLE — Park Plaza Garage",
+      "address": "50 Park Plaza, Boston, MA 02116",
+      "lat": 42.3516,
+      "lng": -71.0696,
+      "stalls": 90,
+      "hours": "24 hours",
+      "notes": "Example data. Covered garage, clearance 6 ft 6 in.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-beacon-hill",
+      "name": "EXAMPLE — Beacon Hill Garage",
+      "address": "34 Beacon St, Boston, MA 02108",
+      "lat": 42.3578,
+      "lng": -71.0662,
+      "stalls": 60,
+      "hours": "6:00 AM – 11:00 PM",
+      "notes": "Example data. Enter from the side street, not the booked block.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-clarendon",
+      "name": "EXAMPLE — Clarendon Lot",
+      "address": "200 Clarendon St, Boston, MA 02116",
+      "lat": 42.3493,
+      "lng": -71.0748,
+      "stalls": 40,
+      "hours": "6:00 AM – 10:00 PM",
+      "notes": "Example data. Surface lot. No oversized vehicles.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-cambridge-st",
+      "name": "EXAMPLE — Cambridge Street Garage",
+      "address": "100 Cambridge St, Boston, MA 02114",
+      "lat": 42.3604,
+      "lng": -71.0618,
+      "stalls": 150,
+      "hours": "24 hours",
+      "notes": "Example data. Customer parking uses the north entrance.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-kendall",
+      "name": "EXAMPLE — Kendall Square Lot",
+      "address": "1 Broadway, Cambridge, MA 02142",
+      "lat": 42.3629,
+      "lng": -71.0846,
+      "stalls": 70,
+      "hours": "5:00 AM – 12:00 AM",
+      "notes": "Example data. Across the river. Confirm the customer can cross.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-seaport",
+      "name": "EXAMPLE — Seaport Pier Garage",
+      "address": "1 Seaport Blvd, Boston, MA 02210",
+      "lat": 42.3519,
+      "lng": -71.0422,
+      "stalls": 200,
+      "hours": "24 hours",
+      "notes": "Example data. Farther option. No shuttle in this proof of concept.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-somerville",
+      "name": "EXAMPLE — Somerville Avenue Garage",
+      "address": "300 Somerville Ave, Somerville, MA 02143",
+      "lat": 42.381,
+      "lng": -71.096,
+      "stalls": 85,
+      "hours": "7:00 AM – 9:00 PM",
+      "notes": "Example data. Check that the booking window fits these hours.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-east-boston",
+      "name": "EXAMPLE — East Boston Lot",
+      "address": "150 Bremen St, East Boston, MA 02128",
+      "lat": 42.3748,
+      "lng": -71.0305,
+      "stalls": 110,
+      "hours": "24 hours",
+      "notes": "Example data. Long relocation. Offer only if nearer garages are full.",
+      "managed": true,
+      "example": true
+    },
+    {
+      "id": "ex-unmanaged",
+      "name": "EXAMPLE — Private lot (not managed)",
+      "address": "410 Beacon St, Boston, MA 02115",
+      "lat": 42.3555,
+      "lng": -71.0728,
+      "stalls": 12,
+      "hours": "24 hours",
+      "notes": "Example data. Sits on the sample booking pin and must never be offered.",
+      "managed": false,
+      "example": true
+    }
+  ]
+}
